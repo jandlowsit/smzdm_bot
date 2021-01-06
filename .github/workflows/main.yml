@@ -6,12 +6,11 @@ name: "GitHub Actions SMZDM Bot"
 # events but only for the main branch
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
-    - cron: '0/5 * * * *'
-
+    - cron: "0/5 * * * *"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
