@@ -44,7 +44,7 @@ class SMZDM_Bot(object):
         url = 'https://zhiyou.smzdm.com/user/checkin/jsonp_checkin'
         msg = self.session.get(url)
         if self.__json_check(msg):
-            return self.msgFormat(msg.json())
+            return msg.json()
         return msg.content
 
     def msgFormat(self, msg):
