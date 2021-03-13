@@ -3,12 +3,14 @@
 使用github actions 定时执行
 @author : stark
 """
-import requests,os
+import requests
+import os
 from sys import argv
 
 import config
 from utils.serverchan_push import push_to_wechat
 import json
+
 
 class SMZDM_Bot(object):
     def __init__(self):
@@ -25,7 +27,7 @@ class SMZDM_Bot(object):
             result = msg.json()
             return True
         except Exception as e:
-            print(f'Error : {e}')            
+            print(f'Error : {e}')
             return False
 
     def load_cookie_str(self, cookies):
@@ -35,7 +37,7 @@ class SMZDM_Bot(object):
         :param cookie: 登录过的社区网站 cookie
         """
         cookies = cookies.encode("utf-8").decode("latin1")
-        self.session.headers['Cookie'] = cookies    
+        self.session.headers['Cookie'] = cookies
 
     def checkin(self):
         """
@@ -55,18 +57,15 @@ class SMZDM_Bot(object):
         return _res
 
 
-
-
-
 if __name__ == '__main__':
     sb = SMZDM_Bot()
-    sb.load_cookie_str(config.TEST_COOKIE)
+    # sb.load_cookie_str(config.TEST_COOKIE)
     cookies = os.environ["COOKIES"]
     SERVERCHAN_SECRETKEY = os.environ["SERVERCHAN_SECRETKEY"]
-    # sb.load_cookie_str(cookies)
+    sb.load_cookie_str(cookies)
     # SERVERCHAN_SECRETKEY = config.SERVERCHAN_SECRETKEY
 
     res = sb.checkin()
-    push_to_wechat(text = '什么值得买每日签到',
-                    desp = str(res),
-                    secretKey = SERVERCHAN_SECRETKEY)
+    push_to_wechat(text='什么值得买每日签到',
+                   desp=str(res),
+                   secretKey=SERVERCHAN_SECRETKEY)
