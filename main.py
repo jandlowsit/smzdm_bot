@@ -46,10 +46,13 @@ class SMZDM_Bot(object):
         url = 'https://zhiyou.smzdm.com/user/checkin/jsonp_checkin'
         msg = self.session.get(url)
         if self.__json_check(msg):
-            return msg.json()
+            return self.msgFormat(msg.json())
         return msg.content
 
     def msgFormat(self, msg):
+        if type(msg) == "list":
+            return msg
+
         s = msg.get("data")
         _res = "当前积分："+str(s.get("point"))+"\n"
         _res += "当前经验值："+str(s.get("exp"))+"\n"
