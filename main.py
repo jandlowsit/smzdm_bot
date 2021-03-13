@@ -56,7 +56,9 @@ class SMZDM_Bot(object):
         s = msg.get("data")
         _res = "当前积分："+str(s.get("point"))+"\n"
         _res += "当前经验值："+str(s.get("exp"))+"\n"
-        _res += "签到天数："+str(s.get("checkin_num"))+"\n"
+        _res += "签到天数：" + str(s.get("checkin_num")) + "\n"
+        _res += "提示："+str(s.get("slogan"))+"\n"
+
         return _res
 
 
